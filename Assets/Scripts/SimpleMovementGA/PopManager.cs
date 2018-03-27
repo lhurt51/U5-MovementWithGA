@@ -10,10 +10,10 @@ public class PopManager : MonoBehaviour {
 	public static float elapsed = 0.0f;
 	public float trialTime = 5.0f;
 
-	int generation = 1;
-	List<GameObject> population = new List<GameObject>();
+	protected int generation = 1;
+	protected List<GameObject> population = new List<GameObject>();
 
-	GUIStyle guiStyle = new GUIStyle();
+	protected GUIStyle guiStyle = new GUIStyle();
 
 	void OnGUI() {
 		guiStyle.fontSize = 25;
@@ -27,7 +27,7 @@ public class PopManager : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		for (int i = 0; i < popSize; i++) {
 			Vector3 startingPos = new Vector3 (this.transform.position.x + Random.Range (-2.0f, 2.0f), this.transform.position.y, this.transform.position.z + Random.Range (-2.0f, 2.0f));
 			GameObject bot = Instantiate (botPrefab, startingPos, this.transform.rotation);
@@ -37,7 +37,7 @@ public class PopManager : MonoBehaviour {
 		}
 	}
 
-	GameObject Breed(GameObject P1, GameObject P2) {
+	protected virtual GameObject Breed(GameObject P1, GameObject P2) {
 		Vector3 startingPos = new Vector3 (this.transform.position.x + Random.Range (-2.0f, 2.0f), this.transform.position.y, this.transform.position.z + Random.Range (-2.0f, 2.0f));
 		GameObject offspring = Instantiate (botPrefab, startingPos, this.transform.rotation);
 		Brain brain = offspring.GetComponent<Brain> ();
@@ -53,7 +53,7 @@ public class PopManager : MonoBehaviour {
 		return offspring;
 	}
 
-	void BreedNewPop() {
+	protected virtual void BreedNewPop() {
 		List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().timeAlive).ThenBy(o => o.GetComponent<Brain>().dstTraveled).ToList();
 
 		population.Clear ();

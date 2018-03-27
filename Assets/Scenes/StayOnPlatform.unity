@@ -278,8 +278,8 @@ GameObject:
   - component: {fileID: 918847963}
   - component: {fileID: 918847962}
   - component: {fileID: 918847961}
-  m_Layer: 0
-  m_Name: Capsule
+  m_Layer: 8
+  m_Name: Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 1318378928}
   - component: {fileID: 1318378927}
   - component: {fileID: 1318378926}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ComplexBrain : MonoBehaviour {
 
 	public float timeAlive;
+	public float timeWalking;
 	public GeneticAlgo GA;
 	public GameObject eyes;
 
@@ -30,7 +31,7 @@ public class ComplexBrain : MonoBehaviour {
 	void Update () {
 		if (!alive) return;
 
-		Debug.DrawRay (eyes.transform.position, eyes.transform.forward * 10.0f, Color.red, 10.0f);
+		Debug.DrawRay (eyes.transform.position, eyes.transform.forward * 10.0f, Color.red, 1.0f);
 		seeGround = false;
 		RaycastHit hit;
 
@@ -44,11 +45,11 @@ public class ComplexBrain : MonoBehaviour {
 		float v = 0.0f;
 		if (seeGround) {
 			// Make v relative to the character and always move forward
-			if (GA.GetGene (0) == 0) v = 1.0f;
+			if (GA.GetGene (0) == 0) {v = 1.0f; timeWalking += 1.0f;}
 			else if (GA.GetGene (0) == 1) h = -90.0f;
 			else if (GA.GetGene (0) == 2) h = 90.0f;
 		} else {
-			if (GA.GetGene (1) == 0) v = 1.0f;
+			if (GA.GetGene (1) == 0) {v = 1.0f; timeWalking += 1.0f;}
 			else if (GA.GetGene (1) == 1) h = -90.0f;
 			else if (GA.GetGene (1) == 2) h = 90.0f;
 		}
