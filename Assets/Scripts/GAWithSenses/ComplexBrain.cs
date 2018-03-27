@@ -8,10 +8,16 @@ public class ComplexBrain : MonoBehaviour {
 	public float timeWalking;
 	public GeneticAlgo GA;
 	public GameObject eyes;
+	public GameObject ethanPrefab;
 
 	int geneLength = 2;
 	bool alive = true;
 	bool seeGround = true;
+	GameObject ethan;
+
+	void OnDestroy() {
+		Destroy (ethan);
+	}
 
 	void OnCollisionEnter(Collision obj) {
 		if (obj.gameObject.tag == "dead") alive = false;
@@ -25,13 +31,15 @@ public class ComplexBrain : MonoBehaviour {
 		GA = new GeneticAlgo(geneLength, 3);
 		timeAlive = 0.0f;
 		alive = true;
+		ethan = Instantiate (ethanPrefab, this.transform.position, this.transform.rotation);
+		ethan.GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl> ().target = this.transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!alive) return;
 
-		Debug.DrawRay (eyes.transform.position, eyes.transform.forward * 10.0f, Color.red, 1.0f);
+		Debug.DrawRay (eyes.transform.position, eyes.transform.forward * 10.0f, Color.red, 0.2f);
 		seeGround = false;
 		RaycastHit hit;
 
